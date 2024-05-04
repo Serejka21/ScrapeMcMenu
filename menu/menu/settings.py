@@ -26,6 +26,10 @@ USER_AGENT = (
     "Chrome/89.0.4389.90 Safari/537.36"
 )
 
+# Default Selenium driver settings
+SELENIUM_DRIVER_NAME = "chrome"
+SELENIUM_DRIVER_ARGUMENTS = ["--headless"]
+
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
 
