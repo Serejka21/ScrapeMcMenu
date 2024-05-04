@@ -19,6 +19,13 @@ NEWSPIDER_MODULE = "menu.spiders"
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
 
+# Default user-agent data for scraping requests
+USER_AGENT = (
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+    "AppleWebKit/537.36 (KHTML, like Gecko) "
+    "Chrome/89.0.4389.90 Safari/537.36"
+)
+
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
 
