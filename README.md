@@ -133,8 +133,8 @@ Example:
 }
 ```
 
-**INFO**: it will return client-side error if objects weren`t find with name or contains provided data in name field.
-If you provide doesn`t exist field you will get in result dict mull value
+**INFO**: it will return client-side error if objects weren't find with name or contains provided data in name field.
+If you provide doesn't exist field you will get in result dict mull value
 
 | Parameter | Type     | Description                       |
 | :-------- | :------- | :-------------------------------- |
@@ -155,7 +155,7 @@ It may take some time to finish scraping process.
 
 For your security, this method requires to set in .env a SECRET_KEY variable (like it show in .env.sample)
 
-If provided SECRET_KEY doesn`t no equal to value from .env file it will raise error and return client-side 403 error
+If provided SECRET_KEY doesn`t no equal to value from .env file it will raise and return client-side error
 
 ## Authors
 
