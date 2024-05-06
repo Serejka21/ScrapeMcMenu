@@ -3,6 +3,7 @@ import subprocess
 import sys
 
 from fastapi import FastAPI, Query, HTTPException, Header
+
 from menu.api import utils
 
 
@@ -20,10 +21,10 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
          """
          Send GET request to this endpoint to run Spider script
          and scrape data from source. It will save the data to
-         data.json file
+         data.json file.
          IMPORTANT: to get access for present endpoint you need to
          set environment SECRET_KEY due to example in .env.sample
-         and provide it in request headers 
+         and provide it in request headers .
          """)
 async def run_spiders(secret_key: str = Header(None)) -> dict:
     if secret_key != SECRET_KEY:
@@ -58,7 +59,7 @@ async def run_spiders(secret_key: str = Header(None)) -> dict:
          from scraped data in data.json file.
          If source doesn't exist, it will cause error.
          Run scrapy crawl menu_scraper data.json from terminal
-         to scrape data and try again
+         to scrape data and try again.
          """)
 async def get_all_products(
         page: int = Query(1, ge=1),
@@ -99,7 +100,7 @@ async def get_all_products(
          """
          Send GET request and provide product_name attrib to find
          all similar products data with related name.
-         If name does not exist it will return info message
+         If name does not exist it will return info message.
          Register does not matter
          """)
 async def get_product(product_name: str) -> dict:
@@ -116,7 +117,9 @@ async def get_product(product_name: str) -> dict:
             product_data.append(product)
 
     if len(product_data) == 0:
-        return {"message": "No product found"}
+        raise HTTPException(
+            status_code=404, detail="No product found"
+        )
 
     return {"products": product_data}
 
@@ -126,7 +129,7 @@ async def get_product(product_name: str) -> dict:
          """
          Send GET request and provide product_name and product_field attribs
          to get all similar products field data with related product name.
-         If name does not exist it will return info message
+         If name does not exist it will return info message.
          Register does not matter
          """)
 async def get_product_field(product_name: str, product_field: str) -> dict:
@@ -144,6 +147,8 @@ async def get_product_field(product_name: str, product_field: str) -> dict:
             product_data[product["name"]] = product.get(product_field)
 
     if len(product_data) == 0:
-        return {"message": "No product found"}
+        raise HTTPException(
+            status_code=404, detail="No product found"
+        )
 
     return product_data
