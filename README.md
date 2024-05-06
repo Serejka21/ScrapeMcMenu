@@ -104,7 +104,7 @@ Example:
 }
 ```
 
-**INFO**: it will return client-side error if objects weren`t find with name or contains provided data in name field
+**INFO**: it will return client-side error if object wasn't find with that name or nothing contains provided data in name field
 
 | Parameter | Type     | Description                       |
 | :-------- | :------- | :-------------------------------- |
@@ -115,7 +115,7 @@ Example:
 ```http
   GET /{product_name}/{product_field}/
 ```
-Provide product_name on ukrainian (The site is scraped on Ukrainian localization). 
+Provide product_name on ukrainian (The site data is scraped on Ukrainian localization). 
 
 It will return all entries in data collection from data.json. However, product_field should be provided on eng
 
