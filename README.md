@@ -26,6 +26,12 @@ After that run and install requirement packages
 pip install -r requirements.txt
 ```
 
+Finally, you can run server and try to get data by API endpoints
+
+```
+uvicorn main:app --reload
+```
+
 To run scraping spider move to menu dir and execute
 scrapy crawl Script
 ```
@@ -33,12 +39,6 @@ cd menu
 scrapy crawl menu_scraper -o data.json
 ```
 WARNING: If you want to change the file name, you must also change the value in FEEDS of the settings.py file and the corresponding name in utils.py of the get_json_data() method inside scraped_data variable
-
-Finally, you can run server and try to get data by API endpoints
-
-```
-uvicorn main:app --reload
-```
 ## API Reference
 
 You can read short resources description in generated Swagger UI visited /docs endpoint
@@ -53,6 +53,16 @@ You can read short resources description in generated Swagger UI visited /docs e
 ```
 Present endpoint will return a collect data in result of page scraping from .json data file
 If data file doesn`t exist it will cause client-side error
+
+It maintains pagination, provide 2 query params:
+page (min=1) - to select page number
+size (min=1, max=97) - to set count of elements once the page
+
+If you set invalid param it will be handle by validation
+
+Example request:
+/all_products/?page=1&size=10
+
 
 #### Get item by product_name
 
