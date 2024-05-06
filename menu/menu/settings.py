@@ -12,9 +12,6 @@ BOT_NAME = "menu"
 SPIDER_MODULES = ["menu.spiders"]
 NEWSPIDER_MODULE = "menu.spiders"
 
-# Crawl responsibly by identifying yourself (and your website) on the user-agent
-# USER_AGENT = "menu (+http://www.yourdomain.com)"
-
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
 
