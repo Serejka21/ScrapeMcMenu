@@ -15,7 +15,16 @@ app = FastAPI(
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 
-@app.get("/run_spider/")
+@app.get("/run_spider/",
+         description=
+         """
+         Send GET request to this endpoint to run Spider script
+         and scrape data from source. It will save the data to
+         data.json file
+         IMPORTANT: to get access for present endpoint you need to
+         set environment SECRET_KEY due to example in .env.sample
+         and provide it in request headers 
+         """)
 async def run_spiders(secret_key: str = Header(None)) -> dict:
     if secret_key != SECRET_KEY:
         raise HTTPException(
@@ -42,7 +51,15 @@ async def run_spiders(secret_key: str = Header(None)) -> dict:
     return {"status": "Spider started", "output": result.stdout}
 
 
-@app.get("/all_products/")
+@app.get("/all_products/",
+         description=
+         """
+         Sen GET request to this endpoint to get all products
+         from scraped data in data.json file.
+         If source doesn't exist, it will cause error.
+         Run scrapy crawl menu_scraper data.json from terminal
+         to scrape data and try again
+         """)
 async def get_all_products(
         page: int = Query(1, ge=1),
         size: int = Query(10, ge=1, le=97)
@@ -77,7 +94,14 @@ async def get_all_products(
     }
 
 
-@app.get("/{product_name}/")
+@app.get("/{product_name}/",
+         description=
+         """
+         Send GET request and provide product_name attrib to find
+         all similar products data with related name.
+         If name does not exist it will return info message
+         Register does not matter
+         """)
 async def get_product(product_name: str) -> dict:
     try:
         scraped_data = utils.get_json_data()
@@ -97,7 +121,14 @@ async def get_product(product_name: str) -> dict:
     return {"products": product_data}
 
 
-@app.get("/{product_name}/{product_field}/")
+@app.get("/{product_name}/{product_field}/",
+         description=
+         """
+         Send GET request and provide product_name and product_field attribs
+         to get all similar products field data with related product name.
+         If name does not exist it will return info message
+         Register does not matter
+         """)
 async def get_product_field(product_name: str, product_field: str) -> dict:
     try:
         scraped_data = utils.get_json_data()
