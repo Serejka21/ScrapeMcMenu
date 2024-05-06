@@ -4,6 +4,11 @@
 # https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
 from scrapy import signals
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.ui import WebDriverWait
+from scrapy_selenium import SeleniumRequest
+from scrapy.http import HtmlResponse
 
 # useful for handling different item types with a single interface
 from itemadapter import is_item, ItemAdapter
